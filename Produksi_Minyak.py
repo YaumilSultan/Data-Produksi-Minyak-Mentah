@@ -16,10 +16,10 @@ st.sidebar.subheader('''Creator: M. Yaumil Sultan R.
 
 #nomor 1 -------------------------------------------------------------------------------------------------------------------------
 
-f = open('Produksi_minyak_mentah.csv')
+f = open('kode_negara_lengkap.json')
 fjson = json.load(f)
 
-df = pd.read_csv('kode_negara_lengkap.json')
+df = pd.read_csv('Produksi_minyak_mentah.csv')
 
 df1=df['kode_negara'].values.tolist()
 df2=[]
