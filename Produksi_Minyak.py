@@ -87,6 +87,7 @@ bar2 = alt.Chart(df_kumulatif.head(number1)).mark_bar().encode(alt.X('Negara'),a
 st.altair_chart(bar2, use_container_width=True)
 
 #nomor 4 ------------------------------------------------------------------------------------------------------------------------------
+
 st.subheader('Jumlah Produksi Terbesar & Terkecil Keseluruhan Tahun')
 
 colum1, colum2 = st.columns(2)
@@ -114,3 +115,34 @@ with colum2:
 
     st.caption("Negara: {}  \nProduksi: {}".format(
             reversed_df_kumulatif.iloc[0]['Negara'], reversed_df_kumulatif.iloc[0]['Kumulatif']))
+
+
+st.subheader('Jumlah Produksi Terbesar & Terkecil Pada Tahun Tertentu')
+
+df.sort_values(by=['tahun'], ascending=True)
+df_max = df.drop_duplicates('tahun')
+
+option2 = st.selectbox(
+     'Tahun:',
+     (df_max['tahun']))
+
+colum3, colum4 = st.columns(2)
+
+with colum3:
+    st.write('Jumlah Produksi Terbesar')
+
+    grouped = df.groupby(df['tahun'])
+    df_max = grouped.get_group(option2).sort_values(by=['produksi'], ascending=False)
+    df_max = df_max.head(1)
+
+    st.dataframe(df_max)
+
+with colum4:
+    st.write('Jumlah Produksi Terkecil')
+
+    grouped = df.groupby(df['tahun'])
+    df_max = grouped.get_group(option2).sort_values(by=['produksi'], ascending=True)
+    df_max = df_max.loc[(df_max!=0).any(axis=1)]
+    df_max = df_max.head(1)
+
+    st.dataframe(df_max)
