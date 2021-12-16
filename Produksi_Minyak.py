@@ -87,26 +87,30 @@ bar2 = alt.Chart(df_kumulatif.head(number1)).mark_bar().encode(alt.X('Negara'),a
 st.altair_chart(bar2, use_container_width=True)
 
 #nomor 4 ------------------------------------------------------------------------------------------------------------------------------
-
 st.subheader('Jumlah Produksi Terbesar & Terkecil Keseluruhan Tahun')
-st.write('Jumlah Produksi Terbesar Keseluruhan Tahun')
 
-st.caption("Negara: {}  \nProduksi: {}".format(
-        df_kumulatif.iloc[0]['Negara'], df_kumulatif.iloc[0]['Kumulatif']))
+colum1, colum2 = st.columns(2)
 
-st.write('Jumlah Produksi Terkecil Keseluruhan Tahun')
+with colum1:
+    st.write('Jumlah Produksi Terbesar Keseluruhan Tahun')
 
-reversed_df_kumulatif = df_kumulatif.iloc[::-1]
+    st.caption("Negara: {}  \nProduksi: {}".format(
+            df_kumulatif.iloc[0]['Negara'], df_kumulatif.iloc[0]['Kumulatif']))
 
-lowest = []
-low = []
-for i in reversed_df_kumulatif['Kumulatif']:
-    for j in reversed_df_kumulatif['Negara']:
-        if i != 0:
-            lowest.append(i)
-            low.append(j)
+with colum2:
+    st.write('Jumlah Produksi Terkecil Keseluruhan Tahun')
 
-reversed_df_kumulatif = pd.DataFrame(list(zip(low, lowest)), columns =['Negara', 'Kumulatif'])
+    reversed_df_kumulatif = df_kumulatif.iloc[::-1]
 
-st.caption("Negara: {}  \nProduksi: {}".format(
-        reversed_df_kumulatif.iloc[0]['Negara'], reversed_df_kumulatif.iloc[0]['Kumulatif']))
+    lowest = []
+    low = []
+    for i in reversed_df_kumulatif['Kumulatif']:
+        for j in reversed_df_kumulatif['Negara']:
+            if i != 0:
+                lowest.append(i)
+                low.append(j)
+
+    reversed_df_kumulatif = pd.DataFrame(list(zip(low, lowest)), columns =['Negara', 'Kumulatif'])
+
+    st.caption("Negara: {}  \nProduksi: {}".format(
+            reversed_df_kumulatif.iloc[0]['Negara'], reversed_df_kumulatif.iloc[0]['Kumulatif']))
