@@ -8,7 +8,7 @@ from PIL import Image
 from streamlit.elements import number_input
 
 st.title('Data Produksi Minyak Mentah dari Berbagai Negara di Seluruh Dunia')
-image = Image.open('https://github.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/Iroha.png')
+image = Image.open('https://raw.githubusercontent.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/Iroha.png')
 st.sidebar.image(image)
 st.sidebar.title('いらっしゃいませ (Welcome)')
 st.sidebar.subheader('''Creator: M. Yaumil Sultan R.
@@ -16,10 +16,10 @@ st.sidebar.subheader('''Creator: M. Yaumil Sultan R.
 
 #nomor 1 -------------------------------------------------------------------------------------------------------------------------
 
-f = open('https://github.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/kode_negara_lengkap.json')
+f = open('https://raw.githubusercontent.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/kode_negara_lengkap.json')
 fjson = json.load(f)
 
-df = pd.read_csv('https://github.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/Produksi_minyak_mentah.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/Produksi_minyak_mentah.csv')
 
 df1=df['kode_negara'].values.tolist()
 df2=[]
@@ -85,3 +85,45 @@ df_kumulatif = pd.DataFrame(list(zip(negara, lst)), columns =['Negara', 'Kumulat
 
 bar2 = alt.Chart(df_kumulatif.head(number1)).mark_bar().encode(alt.X('Negara'),alt.Y('Kumulatif'))
 st.altair_chart(bar2, use_container_width=True)
+#nomor 4 ------------------------------------------------------------------------------------------------------------------------------
+'''
+st.subheader('Jumlah Produksi Terbesar & Terkecil Keseluruhan Tahun')
+st.write('Jumlah Produksi Terbesar Keseluruhan Tahun')
+
+st.caption("Negara: {}  \nProduksi: {}".format(
+        df_kumulatif.iloc[0]['Negara'], df_kumulatif.iloc[0]['Kumulatif']))
+
+st.write('Jumlah Produksi Terkecil Keseluruhan Tahun')
+
+reversed_df_kumulatif = df_kumulatif.iloc[::-1]
+
+lowest = []
+low = []
+for i in reversed_df_kumulatif['Kumulatif']:
+    for j in reversed_df_kumulatif['Negara']:
+        if i != 0:
+            lowest.append(i)
+            low.append(j)
+
+reversed_df_kumulatif = pd.DataFrame(list(zip(low, lowest)), columns =['Negara', 'Kumulatif'])
+
+st.caption("Negara: {}  \nProduksi: {}".format(
+        reversed_df_kumulatif.iloc[0]['Negara'], reversed_df_kumulatif.iloc[0]['Kumulatif']))
+
+
+st.subheader('Jumlah Produksi Terbesar & Terkecil Pada Tahun Tertentu')
+
+df = df.sort_values(by=['produksi'],ascending=False)
+
+df.sort_values(by=['tahun'], ascending=True)
+df_new = df.drop_duplicates('tahun')
+
+option2 = st.selectbox(
+     'Tahun:',
+     (df_new['tahun']))
+
+grouped = df.groupby(df['tahun'])
+df_option1 = grouped.get_group(option2)
+
+st.write('Jumlah Produksi Terbesar')
+st.write('Jumlah Produksi Terkecil')'''
