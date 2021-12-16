@@ -85,3 +85,28 @@ df_kumulatif = pd.DataFrame(list(zip(negara, lst)), columns =['Negara', 'Kumulat
 
 bar2 = alt.Chart(df_kumulatif.head(number1)).mark_bar().encode(alt.X('Negara'),alt.Y('Kumulatif'))
 st.altair_chart(bar2, use_container_width=True)
+
+#nomor 4 ------------------------------------------------------------------------------------------------------------------------------
+
+st.subheader('Jumlah Produksi Terbesar & Terkecil Keseluruhan Tahun')
+st.write('Jumlah Produksi Terbesar Keseluruhan Tahun')
+
+st.caption("Negara: {}  \nProduksi: {}".format(
+        df_kumulatif.iloc[0]['Negara'], df_kumulatif.iloc[0]['Kumulatif']))
+
+st.write('Jumlah Produksi Terkecil Keseluruhan Tahun')
+
+reversed_df_kumulatif = df_kumulatif.iloc[::-1]
+
+lowest = []
+low = []
+for i in reversed_df_kumulatif['Kumulatif']:
+    for j in reversed_df_kumulatif['Negara']:
+        if i != 0:
+            lowest.append(i)
+            low.append(j)
+
+reversed_df_kumulatif = pd.DataFrame(list(zip(low, lowest)), columns =['Negara', 'Kumulatif'])
+
+st.caption("Negara: {}  \nProduksi: {}".format(
+        reversed_df_kumulatif.iloc[0]['Negara'], reversed_df_kumulatif.iloc[0]['Kumulatif']))
