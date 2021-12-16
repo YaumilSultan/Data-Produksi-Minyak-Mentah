@@ -9,7 +9,7 @@ from PIL import Image
 from streamlit.elements import number_input
 
 st.title('Data Produksi Minyak Mentah dari Berbagai Negara di Seluruh Dunia')
-image = Image.open('C:\Semester 3\Iroha.png')
+image = Image.open('https://github.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/Iroha.png')
 st.sidebar.image(image)
 st.sidebar.title('いらっしゃいませ (Welcome)')
 st.sidebar.subheader('''Creator: M. Yaumil Sultan R.
@@ -17,10 +17,10 @@ st.sidebar.subheader('''Creator: M. Yaumil Sultan R.
 
 #nomor 1 -------------------------------------------------------------------------------------------------------------------------
 
-f = open('C:\Semester 3\Komputer\kode_negara_lengkap.json')
+f = open('https://github.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/kode_negara_lengkap.json')
 fjson = json.load(f)
 
-df = pd.read_csv('C:\Semester 3\Komputer\produksi_minyak_mentah.csv')
+df = pd.read_csv('https://github.com/YaumilSultan/Data-Produksi-Minyak-Mentah/blob/24e360e2609a69bd7f4bcbb744b44488b91f3a8e/Produksi_minyak_mentah.csv')
 
 df1=df['kode_negara'].values.tolist()
 df2=[]
